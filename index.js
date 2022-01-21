@@ -6,7 +6,7 @@ const port=8000;
 const app=express();
 
 //setting up the view enjine
-app.set('view enjine','ejs');
+app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
 app.use('/',router);
 

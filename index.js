@@ -6,7 +6,10 @@ const path=require('path');
 
 const port=8000;
 const app=express();
-app.use(expressLayouts)
+app.use(expressLayouts);
+app.use(express.static('./assets'));
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
 
 //setting up the view enjine
 app.set('view engine','ejs');

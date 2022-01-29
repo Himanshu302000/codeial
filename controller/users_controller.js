@@ -57,5 +57,5 @@ module.exports.create=function(req,res){
 //getting the sign in data
 
 module.exports.createSession=function(req,res){
-    //toDo Later
+    return res.redirect('/');
 }

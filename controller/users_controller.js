@@ -10,12 +10,21 @@ module.exports.posts=function(req,res){
 
 //render the signup Page
 module.exports.signUp=function(req,res){
-    return res.render('user_sign_up',{
-        title:'codeial | Sign Up'
-    })
+  if(req.isAuthenticated())
+  {
+      return res.redirect('/users/profile')
+  }
+  return res.render('user_sign_up',{
+      title:'codeial|signUp'
+  })
+  
 }
 //render the sign in page
 module.exports.signIn=function(req,res){
+    if(req.isAuthenticated())
+  {
+      return res.redirect('/users/profile')
+  }
     return res.render('user_sign_in',{
         title:'codeial | Sign In'
     })

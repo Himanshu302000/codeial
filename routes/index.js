@@ -8,4 +8,5 @@ const homeController= require('../controller/home_controller');
 console.log('router loaded')  //to check if the router is loaded
 router.get('/',homeController.home)
 router.use('/users',require('./users'))
+router.use('/posts',require('./posts'));
 module.exports=router;

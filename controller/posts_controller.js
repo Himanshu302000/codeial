@@ -11,6 +11,7 @@ module.exports.create=function(req,res){
             return;
         }
         //console.log(post)
+        req.flash('success','Post created Successfully');
         return res.redirect('back');
     })
 }
@@ -19,12 +20,14 @@ module.exports.destroy=function(req,res){
     Post.findById(req.params.id,function(err,post){
         if(post.user==req.user.id){
             post.remove();
+            req.flash('success','Post deleted Successfully');
             Comment.deleteMany({post:req.params.id},function(err){
                 return res.redirect('back');
             });
 
         }
         else{
+            req.flash('error','You cannot deleted Successfully');
             return res.redirect('back');
         }
     })

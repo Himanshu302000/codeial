@@ -27,13 +27,20 @@ module.exports.index=async function(req,res){
                      message:"Internal Server error"
                  })
              }
-             //if(post.user==req.user.id){
+             if(post.user==req.user.id){
                  post.remove();
-                 //req.flash('success','Post deleted Successfully');
+                 req.flash('success','Post deleted Successfully');
                  Comment.deleteMany({post:req.params.id});
 
                 return res.json(200,{
                     message:"post and associated comments deleted successfully"
                 })
+            }
+            else{
+                return res.json(401,{
+                    message:"you cannot delete that post"
+                })
+            }
+            
         })
  }

@@ -1,19 +1,25 @@
 
 const Comment=require('../models/comment')
 const Post=require('../models/post')
+const User = require('../models/user')
+const commentsMailer=require('../mailers/comments_mailer');
 
 module.exports.create=async function(req,res){
     try{
-        let posts= await Post.findById(req.body.post);
+        let post= await Post.findById(req.body.post);
     
     let comment=await Comment.create({
         content:req.body.content,
         post:req.body.post,
         user:req.user._id});
 
-        posts.comments.push(comment);
+        await post.comments.push(comment);
+        
+        await post.save();
+        console.log(comment.user)
+        comment=await comment.populate('user','name email');
+        commentsMailer.newComment(comment);
         req.flash('success','Commented posted successfuly')
-        posts.save();
         return res.redirect('/');
     }
     catch(err){

@@ -3,13 +3,13 @@ const { getMaxListeners } = require('../models/user');
 const User = require('../models/user');
 
 exports.newComment = (comment) => {
-    console.log('inside newComment mailer');
+    let htmlString=nodeMailer.renderTemplate({comment:comment},'/comments/new_comment.ejs');
 
     nodeMailer.transporter.sendMail({
         from:'codeialwebsite30@gmail.com',
         to:comment.user.email,
         subject:"New Comment Published",
-        html:"<h1>Your comment is posted</h1>"
+        html:htmlString
     },
     (err,info)=>{
         if(err)

@@ -3,6 +3,7 @@ const Comment=require('../models/comment')
 const Post=require('../models/post')
 const User = require('../models/user')
 const commentsMailer=require('../mailers/comments_mailer');
+const Like=require('../models/like')
 
 module.exports.create=async function(req,res){
     try{
@@ -38,6 +39,8 @@ module.exports.destroy=async function(req,res){
         let postId=comment.post;
 
         comment.remove();
+
+        await Like.deleteMany({likeable:comment._id,onModel:'Comment'})
 
         Post.findByIdAndUpdate(postId,{$pull: {comments:req.params.id}},function(err,post){
             return res.redirect('back');

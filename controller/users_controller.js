@@ -139,3 +139,8 @@ module.exports.update=async function(req,res){
 
 
 }
+
+module.exports.addFriend=function(req,res)
+{
+    
+}

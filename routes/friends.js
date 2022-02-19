@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const friendsController = require("../controllers/friends_controller");
+const friends_Controller = require('../controller/friendsController')
 
-router.get("/add-friend" , passport.checkAuthentication ,friendsController.addFriend);
+router.get("/add-friend" , passport.checkAuthentication ,friends_Controller.addFriend);
 module.exports = router;

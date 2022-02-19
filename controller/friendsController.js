@@ -1,5 +1,5 @@
-const Users = require("../models/users");
-const Friendships = require("../models/friendships");
+const Users = require("../models/user");
+const Friendships = require('../models/friendship')
 
 
 
@@ -42,10 +42,5 @@ module.exports.addFriend = async function(request , response){
             message : "Request Successful",
         });
     }
-
-
-    console.log(populated_user);
-     return response.redirect("back" , {
-         populated_user:request.user
-     });
+     return response.redirect("back" );
 }

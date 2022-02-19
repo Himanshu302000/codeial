@@ -17,7 +17,7 @@
         <%}%>
         <div class="btn-grp">
                 <% let isFriend = false %>
-                <% for(let friend of populated_user.friends){ %>
+                <% for( friend of locals.user.friends){ %>
                  
                   <% if(friend.to_user == profile_user.id || friend.from_user == profile_user.id){ %>
                     <% isFriend = true %>

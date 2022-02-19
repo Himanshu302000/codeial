@@ -45,13 +45,13 @@ module.exports.toggleLike=async function(req,res)
             likeable.likes.push(newLike._id);
             likeable.save();
         }
-        // return res.json(200,{
-        //     message :"Request Successfull",
-        //     data: {
-        //         deleted:deleted,
-        //     }
-        //})
-        return res.redirect('back')
+         return res.json(200,{
+            message :"Request Successfull",
+            data: {
+                deleted:deleted,
+            }
+        })
+        //return res.redirect('back')
     }
     catch(err){
         console.log(err);

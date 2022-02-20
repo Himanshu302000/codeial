@@ -23,12 +23,30 @@
 
 <%if(locals.user){%>
 <section id="user-friends">
-    <h4>Friends</h4>
+
+    
+
+        <section>
+            <h4>your Friends</h4>
+            <%for(friend of friends){%>
+                <p>
+                    <a href="/users/profile/<%=friend.to_user.id%>"><%=friend.to_user.name%></a>
+                </p>
+                
+           <% }%>
+           </section>
+    
+
+
+
+   <section>
+    <h4>All Users</h4>
     <%for(u of all_user){%>
         <p>
             <a href="/users/profile/<%=u.id%>"><%=u.name%></a>
         </p>
     <%}%>
+   </section>
 </section>
 <%}%>
 

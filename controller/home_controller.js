@@ -26,11 +26,25 @@ module.exports.home=async function(req,res){
     }).populate('likes')
 
     let users=await User.find({});
+    let friends = [];
+    if(req.isAuthenticated())
+    {
+         friends=await User.findById(req.user.id).populate({
+            path:'friends',
+            populate:{
+                path:'from_user'
+            },
+            populate:{
+                path:'to_user'
+            }
+        })
+    }
 
         return res.render('home',{
             title:"Codeial|home",
             posts:posts,
-            all_user:users
+            all_user:users,
+            friends:friends.friends
         });
 
     }

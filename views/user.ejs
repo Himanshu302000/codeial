@@ -1,7 +1,7 @@
         <link rel="stylesheet" href="/css/user.css">
         <h1>Welcome to user profile page</h1>
         
-        <img src="<%=user.avatar %>" alt="<%=user.name%>" width="50%"> 
+        <img src="<%=profile_user.avatar %>" alt="<%=profile_user.name%>" width="50%"> 
         <%= user.avatar %>
         <%if(user.id==profile_user.id){%>
                 <form action="/users/update/<%=profile_user.id%>" method="post" enctype="multipart/form-data">
@@ -15,28 +15,33 @@
                 <p><%=profile_user.name %></p>
                 <p><%=profile_user.email %></p>
         <%}%>
-        <div class="btn-grp">
-                <% let isFriend = false %>
-                <% for( friend of locals.user.friends){ %>
-                 
-                  <% if(friend.to_user == profile_user.id || friend.from_user == profile_user.id){ %>
-                    <% isFriend = true %>
-                  <% } %>
-                <% } %>
-                <% if(isFriend){%>
-                  <button class="btn save-btn">
-                    <a style="color:white;" class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
-                      Remove Friend
-                    </a>
-                  </button>
-                <% }else{%>
-                  <button class="btn save-btn">
-                    <a style="color:white;" class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
-                      Add Friend
-                    </a>
-                  </button>
-                <% } %>
-              </div>
+        <%if(user.id!=profile_user.id){%>
+
+          <div class="btn-grp">
+            <% let isFriend = false %>
+            <% for( friend of locals.user.friends){ %>
+             
+              <% if(friend.to_user == profile_user.id || friend.from_user == profile_user.id){ %>
+                <% isFriend = true %>
+              <% } %>
+            <% } %>
+            <% if(isFriend){%>
+              <button class="btn save-btn">
+                <a style="color:white;" class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
+                  Remove Friend
+                </a>
+              </button>
+            <% }else{%>
+              <button class="btn save-btn">
+                <a style="color:red;" class="toggle-friend-btn" href="/friends/add-friend/?id=<%= profile_user.id %>">
+                  Add Friend
+                </a>
+              </button>
+            <% } %>
+          </div>
+          
+        <%}%>
+       
               <script src="js/toggle_friend.js"></script>
               
         
